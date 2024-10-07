@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kbo_service.kbo_service.mapper.GameMapper">
+
+    <!-- 게임 조회 -->
+    <select id="findAll" resultType="game-list">
+        select *
+        from kbo_game_list
+        order by date
+    </select>
+
+    <!-- 게임 상세 조회 -->
+    <!-- gameId -->
+    <select id="findOne" resultType="game-detail">
+        select *
+        from kbo_game_detail_2024
+        where game_id = #{gameId}
+    </select>
+
+    <!-- 게임 필터 조회 -->
+    <!-- team, sports, date-->
+    <!-- sports는 나중에 처리할겨 -->
+    <select id="findFilter" resultType="game">
+        select *
+        from kbo_game_2024
+        where (home_team = #{team} or away_team = #{team})
+                and month(date) = #{month};
+    </select>
+</mapper>
