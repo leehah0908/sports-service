@@ -12,12 +12,10 @@ import java.util.List;
 public interface GameMapper {
 
     // 게임 목록 조회
-    List<GameList> findAll();
+    List<GameList> findAll(String team, String sports, int month);
 
     // 게임 상세 조회
     GameDetail findOne(String gameId);
 
-    // 게임 필터 조회
-    List<Game> findFilter(String team, String sports, int month);
 
 }

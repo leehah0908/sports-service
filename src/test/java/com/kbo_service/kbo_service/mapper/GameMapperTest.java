@@ -50,12 +50,12 @@ class GameMapperTest {
     }
 
     @Test
-    @DisplayName("팀을 키움으로 했을 때 27 경기가 나와야 함")
+    @DisplayName("팀을 키움으로 하고, 월을 5로 했을 때 27 경기가 나와야 함")
     void FilterTest() {
         // given
 
         // when
-        List<Game> filter = mapper.findFilter("키움", "baseball", 5);
+        List<GameList> filter = mapper.findFilter("키움", "baseball", 5);
 
         // then
         assertEquals(filter.size(), 27);

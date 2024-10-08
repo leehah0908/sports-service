@@ -4,10 +4,25 @@
 
 <mapper namespace="com.kbo_service.kbo_service.mapper.GameMapper">
 
+    <sql id="sports-table">
+        <if test="sports == 'kbo'">
+            from kbo_game_list
+        </if>
+        <if test="sports == 'lck'">
+            from lck_game_list
+        </if>
+        <if test="sports == 'mlb'">
+            from mlb_game_list
+        </if>
+
+
+    </sql>
+
     <!-- 게임 조회 -->
     <select id="findAll" resultType="game-list">
         select *
-        from kbo_game_list
+        <include refid="sports-table" />
+        where (home_team = #{team} or away_team = #{team}) and month(date) = #{month};
         order by date
     </select>
 
@@ -19,13 +34,4 @@
         where game_id = #{gameId}
     </select>
 
-    <!-- 게임 필터 조회 -->
-    <!-- team, sports, date-->
-    <!-- sports는 나중에 처리할겨 -->
-    <select id="findFilter" resultType="game">
-        select *
-        from kbo_game_2024
-        where (home_team = #{team} or away_team = #{team})
-                and month(date) = #{month};
-    </select>
 </mapper>

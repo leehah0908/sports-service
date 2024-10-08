@@ -41,44 +41,58 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <body>
         <h2>Sports Results and Schedule</h2>
 
-        <div>
+        <div class="card-container">
             <c:forEach var="game" items="${gameList}">
                 <div class="game-block">
-                    <!-- Game Date -->
-                    <div class="details">Date: ${game.date}</div>
-                    
-                    <!-- Teams and Scores -->
-                    <div class="game-info">
-                        <div class="team-block">
-                            <!-- Home Team Logo and Name -->
-                            <img src="<c:url value='/img/logos/${game.homeTeam}.png'/>" alt="${game.homeTeam} Logo">
-                            <span>${game.homeTeam} (${game.homeScore})</span>
+                    <section class="card" data-gno="${game.gameId}">
+                        <!-- Game Date -->
+                        <div class="details">Date: ${game.date}</div>
+                        
+                        <!-- Teams and Scores -->
+                        <div class="game-info">
+                            <div class="team-block">
+                                <!-- Home Team Logo and Name -->
+                                <img src="<c:url value='/img/logos/${game.homeTeam}.png'/>" alt="${game.homeTeam} Logo">
+                                <span>${game.homeTeam} (${game.homeScore})</span>
+                            </div>
+                            <span>vs</span>
+                            <div class="team-block">
+                                <!-- Away Team Logo and Name -->
+                                <img src="<c:url value='/img/logos/${game.awayTeam}.png'/>" alt="${game.awayTeam} Logo">
+                                <span>${game.awayTeam} (${game.awayScore})</span>
+                            </div>
                         </div>
-                        <span>vs</span>
-                        <div class="team-block">
-                            <!-- Away Team Logo and Name -->
-                            <img src="<c:url value='/img/logos/${game.awayTeam}.png'/>" alt="${game.awayTeam} Logo">
-                            <span>${game.awayTeam} (${game.awayScore})</span>
+                        <!-- Game Status and Winner -->
+                        <div class="details">
+                            Status: ${game.status} | Winner: ${game.winnerTeam}
                         </div>
-                    </div>
-    
-                    <!-- Game Status and Winner -->
-                    <div class="details">
-                        Status: ${game.status} | Winner: ${game.winnerTeam}
-                    </div>
-                    
-                    <!-- Field and Starting Pitchers -->
-                    <div class="details">
-                        Field: ${game.field}
-                    </div>
-                    <div class="details">
-                        Home Team Starting Pitcher: ${game.homeTeamStartingPitcher}
-                    </div>
-                    <div class="details">
-                        Away Team Starting Pitcher: ${game.awayTeamStartingPitcher}
-                    </div>
+                        
+                        <!-- Field and Starting Pitchers -->
+                        <div class="details">
+                            Field: ${game.field}
+                        </div>
+                        <div class="details">
+                            Home Team Starting Pitcher: ${game.homeTeamStartingPitcher}
+                        </div>
+                        <div class="details">
+                            Away Team Starting Pitcher: ${game.awayTeamStartingPitcher}
+                        </div>
+                    </section>
                 </div>
             </c:forEach>
         </div>
     </body>
+
+    <script>
+        const $cardContainer = document.querySelector(".card-container");
+
+        $cardContainer.addEventListener("click", (e) => {
+                if (e.target.matches(".card-container")) return;
+
+                const gno = e.target.closest("section.card").dataset.gno;
+                console.log("게임ID" + gno);
+
+                location.href = "/game/detail/" + gno;
+            });
+    </script>
 </html>

@@ -1,6 +1,7 @@
 package com.kbo_service.kbo_service.service;
 
 import com.kbo_service.kbo_service.entity.Game;
+import com.kbo_service.kbo_service.entity.GameDetail;
 import com.kbo_service.kbo_service.entity.GameList;
 import com.kbo_service.kbo_service.mapper.GameMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,8 @@ public class GameService {
         return mapper.findAll();
     }
 
-
+    public GameDetail detail(String gameId) {
+        System.out.println(mapper.findOne(gameId));
+        return mapper.findOne(gameId);
+    }
 }
