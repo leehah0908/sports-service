@@ -29,7 +29,7 @@ public class GameController {
         return "main";
     }
 
-    // 게임 상세보기
+    // 게임 상세보기이
     @GetMapping("/detail/{gno}")
     public String detail(@PathVariable String gno,
                          Model model) {
